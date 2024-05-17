@@ -3,6 +3,6 @@ from .models import Post
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("text", "image", "date")
 
 admin.site.register(Post, PostAdmin)

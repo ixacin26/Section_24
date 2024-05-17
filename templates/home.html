@@ -1,11 +1,46 @@
 {% extends "base.html" %} {% load thumbnail%} {% block title %}Klaus'
-Homepage{%endblock title %} {% block body %} {% for post in posts%}
-{{post.text}}<br />
-{% thumbnail post.image "200x200" crop="center" as im %}
-<img
-  src="{{post.image.url}}"
-  width="{{ im.width}}"
-  height="{{ im.height}}"
-/>{%endthumbnail%}
-<hr />
-{% endfor%} {% endblock %}
+Homepage{%endblock title %} {% block body %}
+<div class="hero-section border-bottom mb-3">
+  <div class="hero-text">
+    <p class="display-5 text-start text-center fs-3 fw-bolder lh-1">
+      Sabbatical + Schulferien + Jahresurlaub
+    </p>
+    <h1 class="display-1 fw-bold">Auf nach Peru!</h1>
+  </div>
+  <img
+    src="media\img\machu-picchu(2)-43387_1280.jpg"
+    class="img-fluid hero-image"
+    alt="machu-pichu in peru"
+  />
+</div>
+
+<div class="row">
+  {% for post in posts%}
+  <div class="col-sm-6 col-md-3">
+    <div class="card my-4">
+      {% thumbnail post.image "200x200" crop="center" as im %}
+      <img
+        src="{{post.image.url}}"
+        class="card-img-top"
+        alt="What ever you want"
+      />
+      {%endthumbnail%}
+      <div class="card-body">
+        <p class="card-text">{{post.text}}</p>
+        <a href="{% url 'feed:detail' post.id %}" class="btn btn-primary"
+          >View Full Image</a
+        >
+      </div>
+    </div>
+  </div>
+
+  {% empty%}
+    <div class="col-sm-6 offset-3 text-center py-5 my-5">
+        <h3>Welcome</h3>
+        <p>Add your first image?</p>
+        <a href="{% url 'feed:post' %}" class="btn btn-lg btn-success">Upload Image</a>
+    </div>
+  {% endfor%}
+  </div>
+  {% endblock %}
+</div>

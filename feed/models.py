@@ -5,6 +5,7 @@ from sorl.thumbnail import ImageField
 class Post(models.Model):
     text = models.CharField(max_length=140, blank=False, null=False)
     image = ImageField()
+    date = models.DateTimeField(auto_now_add=True)
     
 
     def __str__(self):
